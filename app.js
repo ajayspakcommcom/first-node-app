@@ -17,7 +17,6 @@ app.get("/items", (req, res) => {
 
 // Get single item by ID
 app.get("/items/:id", (req, res) => {
-  console.log('Ram...');
   const item = items.find((i) => i.id === parseInt(req.params.id));
   if (!item) return res.status(404).json({ message: "Item not found" });
   res.json(item);
