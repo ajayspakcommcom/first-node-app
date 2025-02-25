@@ -10,8 +10,7 @@ let items = [
   { id: 2, name: "Item 2" },
   { id: 3, name: "Item 100" },
   { id: 4, name: "Item 2000" },
-  { id: 5, name: "Item 3000" },
-  { id: 6, name: "Item 5000" }
+  { id: 5, name: "Item 3000" }
 ];
 
 // Get all items
