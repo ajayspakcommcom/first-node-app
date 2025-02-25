@@ -1,0 +1,3 @@
+git clone https://ajayspakcommcom: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@github.com/ajayspakcommcom/first-node-app.git
+
+export PATH=$PATH:/usr/bin/node
