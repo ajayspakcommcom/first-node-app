@@ -6,3 +6,36 @@ export PATH=$PATH:/usr/bin/node
 git pull origin main
 npm install
 pm2 restart first-node-app
+
+
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install -y jenkins
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://ajayspakcommcom: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@github.com/ajayspakcommcom/first-node-app.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Restart Application') {
+            steps {
+                sh 'pm2 restart first-node-app || pm2 start index.js --name first-node-app'
+            }
+        }
+    }
+}
+
+
+
