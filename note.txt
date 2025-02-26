@@ -39,3 +39,42 @@ pipeline {
 
 
 
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Latest Code') {
+            steps {
+                script {
+                    // Check if directory exists, if not, clone the repository
+                    if (!fileExists('first-node-app')) {
+                        sh 'git clone https://ajayspakcommcom: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@github.com/ajayspakcommcom/first-node-app.git'
+                    }
+                }
+                dir('first-node-app') {
+                    sh 'git pull origin main'  // Pull latest changes
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('first-node-app') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Restart Application') {
+            steps {
+                dir('first-node-app') {
+                    sh 'pm2 restart first-node-app || pm2 start app.js --name first-node-app'
+                }
+            }
+        }
+    }
+}
+
+
+
