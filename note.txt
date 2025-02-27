@@ -39,42 +39,36 @@ pipeline {
 
 
 
+server {
+    listen 80;
+    server_name 43.204.221.135;
 
-pipeline {
-    agent any
-
-    stages {
-        stage('Clone Latest Code') {
-            steps {
-                script {
-                    // Check if directory exists, if not, clone the repository
-                    if (!fileExists('first-node-app')) {
-                        sh 'git clone https://ajayspakcommcom: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@github.com/ajayspakcommcom/first-node-app.git'
-                    }
-                }
-                dir('first-node-app') {
-                    sh 'git pull origin main'  // Pull latest changes
-                }
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                dir('first-node-app') {
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Restart Application') {
-            steps {
-                dir('first-node-app') {
-                    sh 'pm2 restart first-node-app || pm2 start app.js --name first-node-app'
-                }
-            }
-        }
+    location / {
+        proxy_pass http://localhost:4000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
     }
 }
 
+pm2 start app.js --name first-node-app
+pm2 save
+pm2 startup
 
 
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install -y jenkins
+
+
+
+
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install -y jenkins
+
+http://65.0.127.198
