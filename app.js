@@ -14,6 +14,7 @@ let items = [
   { id: 6, name: "Item 3000" },
   { id: 7, name: "Item 4000" },
   { id: 8, name: "Item 5000" },
+  { id: 9, name: "Item 6000" },
 ];
 
 // Get all items
