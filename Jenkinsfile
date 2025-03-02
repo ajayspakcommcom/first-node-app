@@ -16,6 +16,7 @@ pipeline {
                  sh 'cd /var/lib/jenkins/workspace/first-node-app && pm2 delete first-node-app || true'
                  sh 'cd /var/lib/jenkins/workspace/first-node-app && pm2 start app.js --name "first-node-app"'
                  sh 'pm2 save'
+                 sh 'pm2 startup'
             }
         }
         stage('Restart Nginx') {
