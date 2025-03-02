@@ -7,9 +7,19 @@ pipeline {
     }
 
     stages {
+
+        // stage('Clone Repository') {
+        //     steps {
+        //         git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/ajayspakcommcom/first-node-app.git'
+        //     }
+        // }
+
         stage('Clone Repository') {
             steps {
-                git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/ajayspakcommcom/first-node-app.git'
+                sh '''
+                cd /home/ubuntu/first-node-app
+                git pull origin main
+                '''
             }
         }
 
