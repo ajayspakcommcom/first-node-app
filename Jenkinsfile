@@ -17,7 +17,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 sh '''
-                cd /home/ubuntu/first-node-app
+                cd /var/lib/jenkins/workspace/first-node-app
                 git pull origin main
                 '''
             }
