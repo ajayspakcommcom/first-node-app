@@ -19,7 +19,7 @@ pipeline {
         stage('Start/Restart Application') {
             steps {
                 // sh 'cd /var/lib/jenkins/workspace/first-node-app && pm2 start app.js --name "first-node-app"'
-                sh 'cd /var/lib/jenkins/workspace/first-node-app && pm2 restart first-node-app"'
+                sh 'cd /var/lib/jenkins/workspace/first-node-app && pm2 restart first-node-app'
             }
         }
         stage('Restart Nginx') {
