@@ -8,12 +8,12 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh 'cd /var/lib/jenkins/workspace/first-node-app && npm install'
             }
         }
         stage('Start Application') {
             steps {
-                sh 'pm2 restart all || pm2 start app.js --name "first-node-app"'
+                sh 'cd /var/lib/jenkins/workspace/first-node-app && pm2 restart all || pm2 start app.js --name "first-node-app"'
             }
         }
         stage('Restart Nginx') {

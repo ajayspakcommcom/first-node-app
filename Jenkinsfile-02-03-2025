@@ -1,53 +1,24 @@
 pipeline {
     agent any
-
-    environment {
-        NODEJS_HOME = "/usr/bin/node"
-        PATH = "$NODEJS_HOME/bin:$PATH"
-    }
-
     stages {
-
-        // stage('Clone Repository') {
-        //     steps {
-        //         git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/ajayspakcommcom/first-node-app.git'
-        //     }
-        // }
-
         stage('Clone Repository') {
             steps {
-                sh '''
-                cd /var/lib/jenkins/workspace/first-node-app
-                git pull origin main
-                '''
+                 git branch: 'main', credentialsId: 'first-node-app', url: 'https://github.com/ajayspakcommcom/first-node-app.git'
             }
         }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
-
-        // stage('Build Application') {
-        //     steps {
-        //         sh 'npm run build'
-        //     }
-        // }
-
-        stage('Restart PM2 Process') {
+        stage('Start Application') {
             steps {
-                sh '''
-                pm2 stop first-node-app || true
-                pm2 start app.js --name first-node-app
-                pm2 save
-                '''
+                sh 'pm2 restart all || pm2 start app.js --name "first-node-app"'
             }
         }
-
-        stage('Reload Nginx') {
+        stage('Restart Nginx') {
             steps {
-                sh 'sudo systemctl reload nginx'
+                sh 'sudo systemctl restart nginx'
             }
         }
     }
