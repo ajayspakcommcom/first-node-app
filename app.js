@@ -8,11 +8,15 @@ app.use(express.json());
 let items = [
   { id: 1, name: "Item 1" },
   { id: 2, name: "Item 2" },
+<<<<<<< HEAD
   { id: 3, name: "Item 100" },
   { id: 4, name: "Item 200" },
   { id: 5, name: "Item 3000" },
   { id: 6, name: "Item 3000" },
   { id: 7, name: "Item 4000" },
+=======
+  { id: 3, name: "Item 3" },
+>>>>>>> 5cd2cd7c01731e737b785a71ea5f69011ed23e5d
 ];
 
 // Get all items

@@ -19,11 +19,11 @@ pipeline {
             }
         }
 
-        stage('Build Application') {
-            steps {
-                sh 'npm run build'
-            }
-        }
+        // stage('Build Application') {
+        //     steps {
+        //         sh 'npm run build'
+        //     }
+        // }
 
         stage('Restart PM2 Process') {
             steps {
