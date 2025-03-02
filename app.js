@@ -13,6 +13,7 @@ let items = [
   { id: 5, name: "Ajay" },
   { id: 6, name: "Vijay" },
   { id: 7, name: "Manish" },
+  { id: 8, name: "Roobee" },
 ];
 
 // Get all items
