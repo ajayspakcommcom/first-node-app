@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                 git branch: 'main', credentialsId: 'first-node-app', url: 'https://github.com/ajayspakcommcom/first-node-app.git'
+                git branch: 'main', credentialsId: 'first-node-app', url: 'https://github.com/ajayspakcommcom/first-node-app.git'
             }
         }
         stage('Install Dependencies') {
@@ -11,9 +11,14 @@ pipeline {
                 sh 'cd /var/lib/jenkins/workspace/first-node-app && npm install'
             }
         }
-        stage('Restart Application') {
+        stage('Stop Application') {
             steps {
-                sh 'cd /var/lib/jenkins/workspace/first-node-app && pm2 restart first-node-app || pm2 start app.js --name "first-node-app"'
+                sh 'pm2 stop first-node-app || echo "Application was not running"'
+            }
+        }
+        stage('Start/Restart Application') {
+            steps {
+                sh 'cd /var/lib/jenkins/workspace/first-node-app && pm2 start app.js --name "first-node-app"'
             }
         }
         stage('Restart Nginx') {
