@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/ajayspakcommcom/first-node-app.git'
+                // git 'https://github.com/ajayspakcommcom/first-node-app.git'
+                 git branch: 'main', credentialsId: 'first-node-app', url: 'https://github.com/ajayspakcommcom/first-node-app.git'
             }
         }
         stage('Install Dependencies') {
